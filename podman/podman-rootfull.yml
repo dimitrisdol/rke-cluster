@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: podman-root
+spec:
+ containers:
+   - name: podman-root
+     image: quay.io/podman/stable
+     args:
+       - sleep
+       - "1000000"
+     securityContext:
+       capabilities:
+         add:
+           - "SYS_ADMIN"
+           - "MKNOD"
+           - "SYS_CHROOT"
+           - "SETFCAP"
+           - "DAC_READ_SEARCH"
+     resources:
+       limits:
+         github.com/fuse: 1
